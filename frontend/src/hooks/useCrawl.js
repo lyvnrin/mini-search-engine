@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+const API = import.meta.env.VITE_API_URL || ''
+
 export function useCrawl() {
   const [status, setStatus] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -10,7 +12,7 @@ export function useCrawl() {
     setError(null)
     setStatus(null)
     try {
-      const res = await fetch('/api/crawl/', {
+      const res = await fetch(`${API}/crawl/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ seed_url: seedUrl, max_depth: maxDepth, max_pages: maxPages })

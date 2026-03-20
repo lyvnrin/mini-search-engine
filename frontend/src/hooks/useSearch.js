@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+const API = import.meta.env.VITE_API_URL || ''
+
 export function useSearch() {
   const [results, setResults] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -10,7 +12,7 @@ export function useSearch() {
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch(`/api/search/?q=${encodeURIComponent(query)}`)
+      const res = await fetch(`${API}/search/?q=${encodeURIComponent(query)}`)
       if (!res.ok) throw new Error('Search failed')
       const data = await res.json()
       setResults(data)
