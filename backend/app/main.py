@@ -26,10 +26,10 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[os.getenv("CORS_ORIGIN", "http://localhost:5173")],
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization"],
+    allow_credentials=False,
 )
-
 app.include_router(crawl.router,  prefix="/crawl",  tags=["crawl"])
 app.include_router(search.router, prefix="/search", tags=["search"])
 app.include_router(graph.router,  prefix="/graph",  tags=["graph"])
